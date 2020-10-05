@@ -28,10 +28,10 @@ class Visit(models.Model):
         )
 
 
-def get_duration(visit, leave=django.utils.timezone.localtime()):
-    if leave is None:
-        leave = django.utils.timezone.localtime()
-    duration = leave - visit
+def get_duration(visited, leaved=django.utils.timezone.localtime()):
+    if leaved is None:
+        leaved = django.utils.timezone.localtime()
+    duration = leaved - visited
     return duration
 
 
