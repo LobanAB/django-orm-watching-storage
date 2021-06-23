@@ -27,18 +27,15 @@ class Visit(models.Model):
             leaved="leaved at " + str(self.leaved_at) if self.leaved_at else "not leaved"
         )
 
+    def get_duration(self, visited, leaved=django.utils.timezone.localtime()):
+        if leaved is None:
+            leaved = django.utils.timezone.localtime()
+        duration = leaved - visited
+        return duration
 
-def get_duration(visited, leaved=django.utils.timezone.localtime()):
-    if leaved is None:
-        leaved = django.utils.timezone.localtime()
-    duration = leaved - visited
-    return duration
+    def format_duration(self, duration):
+        duration_in_sec = duration.total_seconds()
+        return f'{ int(duration_in_sec // 3600) }ч. { int((duration_in_sec % 3600) // 60) }мин.'
 
-
-def format_duration(duration):
-    duration_in_sec = duration.total_seconds()
-    return f'{ int(duration_in_sec // 3600) }ч. { int((duration_in_sec % 3600) // 60) }мин.'
-
-
-def is_visit_long(visit, minutes=60):
-    return (visit.total_seconds() > minutes*60)
+    def is_visit_long(self, visit, minutes=60):
+        return (visit.total_seconds() > minutes*60)

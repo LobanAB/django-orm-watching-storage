@@ -12,8 +12,8 @@ def passcard_info_view(request, passcode):
         this_passcard_visits.append(
             {
                 "entered_at": visit.entered_at,
-                "duration": models.format_duration(models.get_duration(visit.entered_at, visit.leaved_at)),
-                "is_strange": models.is_visit_long(models.get_duration(visit.entered_at, visit.leaved_at)),
+                "duration": visit.format_duration(visit.get_duration(visit.entered_at, visit.leaved_at)),
+                "is_strange": visit.is_visit_long(visit.get_duration(visit.entered_at, visit.leaved_at)),
             }
         )
     context = {
