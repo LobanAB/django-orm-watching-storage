@@ -21,10 +21,10 @@ class Visit(models.Model):
     leaved_at = models.DateTimeField(null=True)
 
     def __str__(self):
-        return "{user} entered at {entered} {leaved}".format(
+        return '{user} entered at {entered} {leaved}'.format(
             user=self.passcard.owner_name,
             entered=self.entered_at,
-            leaved="leaved at " + str(self.leaved_at) if self.leaved_at else "not leaved"
+            leaved='leaved at ' + str(self.leaved_at) if self.leaved_at else 'not leaved'
         )
 
     def get_duration(self, visited, leaved=django.utils.timezone.localtime()):
@@ -38,4 +38,4 @@ class Visit(models.Model):
         return f'{ int(duration_in_sec // 3600) }ч. { int((duration_in_sec % 3600) // 60) }мин.'
 
     def is_visit_long(self, visit, minutes=60):
-        return (visit.total_seconds() > minutes*60)
+        return visit.total_seconds() > minutes * 60

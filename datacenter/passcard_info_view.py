@@ -11,13 +11,13 @@ def passcard_info_view(request, passcode):
     for visit in passcard_visits:
         this_passcard_visits.append(
             {
-                "entered_at": visit.entered_at,
-                "duration": visit.format_duration(visit.get_duration(visit.entered_at, visit.leaved_at)),
-                "is_strange": visit.is_visit_long(visit.get_duration(visit.entered_at, visit.leaved_at)),
+                'entered_at': visit.entered_at,
+                'duration': visit.format_duration(visit.get_duration(visit.entered_at, visit.leaved_at)),
+                'is_strange': visit.is_visit_long(visit.get_duration(visit.entered_at, visit.leaved_at)),
             }
         )
     context = {
-        "passcard": passcard,
-        "this_passcard_visits": this_passcard_visits
+        'passcard': passcard,
+        'this_passcard_visits': this_passcard_visits
     }
     return render(request, 'passcard_info.html', context)
