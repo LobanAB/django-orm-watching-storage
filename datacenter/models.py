@@ -27,10 +27,10 @@ class Visit(models.Model):
             leaved='leaved at ' + str(self.leaved_at) if self.leaved_at else 'not leaved'
         )
 
-    def get_duration(self, visited, leaved=django.utils.timezone.localtime()):
-        if leaved is None:
-            leaved = django.utils.timezone.localtime()
-        duration = leaved - visited
+    def get_duration(self):
+        if self.leaved_at is None:
+            self.leaved_at = django.utils.timezone.localtime()
+        duration = self.leaved_at - self.entered_at
         return duration
 
     def format_duration(self, duration):
